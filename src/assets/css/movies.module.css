@@ -1,0 +1,5 @@
+.list {width:50%;margin:auto;padding-top:100px;padding-bottom:100px}
+.group {display: inline-flex;}
+.list .card .card-body p {white-space: nowrap;text-overflow: ellipsis;width: 100px;overflow: hidden;}
+.dropdwn {width:100px;}
+.inp {padding-right: "100px"!important;border-radius: 0px;}
