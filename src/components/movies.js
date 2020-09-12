@@ -35,10 +35,13 @@ export default class Movies extends Component{
     }
     searchMovies = async () => {
         const {search_value , selected_type}= this.state;
-        let result = await axios.get('http://www.omdbapi.com/', {
+        if(search_value == ''){
+            this.setState({ErrorMsg:"Please search with title"});
+        } else {
+            let result = await axios.get('http://www.omdbapi.com/', {
             params: {
               s: search_value,
-              type:selected_type,
+              type:selected_type == 'all' ? selected_type : "",
               apikey:"f49c9bf6"
             }
           });
@@ -47,6 +50,7 @@ export default class Movies extends Component{
           } else {
             this.setState({movies_list:[],ErrorMsg:(result.data && result.data.Error) ?result.data.Error :"something went wrong"});
           }
+        } 
     }
     render() {
         const {movie_types,movies_list} = this.state;
