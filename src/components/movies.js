@@ -16,8 +16,11 @@ export default class Movies extends Component{
             isFavourite:false
         }
     }
-    componentWillReceiveProps = ({ isFavourite }) =>{
+    componentWillReceiveProps = ({ isFavourite , isClear}) =>{
         let list = !isFavourite ? JSON.parse(localStorage.getItem("favourites")) : [];
+        if(isClear){
+            this.setState({movies_list:[],search_value:'',selected_type:'',ErrorMsg:"No Movies Found"});
+        } 
         this.setState({movies_list:list,ErrorMsg:(list && list.length) > 0 ? "No Favourites Found" : "No Movies Found"});
     }
     setFavourite = (movie_item) => {
@@ -41,7 +44,7 @@ export default class Movies extends Component{
             let result = await axios.get('http://www.omdbapi.com/', {
             params: {
               s: search_value,
-              type:selected_type == 'all' ? selected_type : "",
+              type:selected_type,
               apikey:"f49c9bf6"
             }
           });

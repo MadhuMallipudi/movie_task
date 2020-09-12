@@ -7,18 +7,22 @@ class App extends Component {
     super(props);
     this.state={
       fav:true,
+      isClear:false
     }
   }
   favouriteFun = () => {
     this.setState({fav:!this.state.fav});
   } 
+  clearFavourites = () =>{
+    this.setState({isClear:true})
+  }
   render(){
-    const {fav} = this.state;
-    const {favouriteFun}= this;
+    const {fav,isClear} = this.state;
+    const {favouriteFun,clearFavourites}= this;
     return (
       <div className="App">
-         <Header favourties={()=>{favouriteFun()}}/>
-         <Movies isFavourite={fav}/>
+         <Header favourties={()=>{favouriteFun()}} clearFav ={()=>clearFavourites()}/>
+         <Movies isFavourite={fav} isClear ={isClear}/>
       </div>
     );
   }
